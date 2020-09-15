@@ -7,15 +7,17 @@ import matplotlib.pyplot as plt
 from PIL import Image
 from torchvision import transforms
 import imageio
-
+import sys
+sys.path.append("..") # Adds higher directory to python modules path.
 from IQA_pytorch import SSIM, MS_SSIM, CW_SSIM, GMSD, LPIPSvgg, DISTS, NLPD, FSIM, VSI, VIFs, VIF, MAD
+
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-ref_path  = 'images/r0.png'
-pred_path = 'images/r1.png' 
+ref_path  = '../images/r0.png'
+pred_path = '../images/r1.png' 
 
-model = SSIM(channels=3).to(device)
+model = LPIPSvgg(channels=3).to(device)
 transform = transforms.Compose(
     [
         transforms.ToTensor(),
